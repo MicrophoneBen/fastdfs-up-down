@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FastDFS 文件上载</title>
+</head>
+<body>
+<h2>FastDfs 文件上载页面</h2>
+
+<div ng-controller="uploadFile">
+    <input formaction="post" type="file" nv-file-select uploader="uploader"/>
+</div>
+<div>
+    <button ng-click="uploadService">点击上传</button>
+</div>
+
+
+</body>
+<script type="text/javascript" src="/webjars/angularjs/1.7.7/angular.min.js" about=""></script>
+<script type="text/javascript" src="/webjars/angular-file-upload/2.1.1/angular-file-upload-all.min.js"></script>
+<script type="text/javascript" src="../js/angularService.js" about=""></script>
+<script type="text/javascript" src="../js/angularController.js" about=""></script>
+</html>

@@ -4,11 +4,11 @@ import com.fdfs.client.updownfile.fdfs.Fdfsutil;
 import com.fdfs.client.updownfile.service.FastDFSClientWrapper;
 import com.github.tobato.fastdfs.domain.conn.FdfsWebServer;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
-import com.github.tobato.fastdfs.domain.upload.FastImageFile;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +21,7 @@ import java.net.URLEncoder;
  * @version 2019年08月12日
  * @since 2019年08月12日
  **/
-@RestController
+@Controller
 @Slf4j
 public class FdfsController {
     private final Fdfsutil fdfsutil;
@@ -87,5 +87,10 @@ public class FdfsController {
         String path = storePath.getFullPath();
         log.info("保存路径={}",path);
         return path;
+    }
+
+    @RequestMapping("up")
+    public String upload(){
+        return "uploadfile";
     }
 }
