@@ -80,8 +80,8 @@ public class FdfsController {
     private FdfsWebServer fdfsWebServer;
 
     @PutMapping("/article/img/fdfs")
+    @ResponseBody
     public String uploadImgfdfs(@RequestParam(value = "editormd-image-file") MultipartFile multipartFile) throws IOException {
-        System.out.println(multipartFile.toString());
         StorePath storePath= storageClient.uploadFile(multipartFile.getInputStream(),
                 multipartFile.getSize(), "jpg", null);
         String path = storePath.getFullPath();
@@ -90,6 +90,7 @@ public class FdfsController {
     }
 
     @RequestMapping("up")
+    @ResponseBody
     public String upload(){
         return "uploadfile";
     }
