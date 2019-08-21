@@ -2,6 +2,7 @@ package com.fdfs.client.updownfile.controller;
 
 import com.fdfs.client.updownfile.fdfs.Fdfsutil;
 import com.fdfs.client.updownfile.service.FastDFSClientWrapper;
+import com.fdfs.client.updownfile.service.FdfsFileService;
 import com.github.tobato.fastdfs.domain.conn.FdfsWebServer;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -16,6 +17,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
+
 /**
  * @author zhangbingquan
  * @version 2019年08月12日
@@ -79,6 +82,9 @@ public class FdfsController {
     @Autowired
     private FdfsWebServer fdfsWebServer;
 
+    @Autowired
+    FdfsFileService fdfsFileService;
+
     @PutMapping("/article/img/fdfs")
     @ResponseBody
     public String uploadImgfdfs(@RequestParam(value = "editormd-image-file") MultipartFile multipartFile) throws IOException {
@@ -94,4 +100,13 @@ public class FdfsController {
     public String upload(){
         return "uploadfile";
     }
+
+
+
+    @GetMapping("listFile")
+    @ResponseBody
+    public List<String> getFileURl(){
+        return fdfsFileService.getfdfsURL();
+    }
+
 }
