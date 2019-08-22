@@ -6,7 +6,9 @@
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <!--展示格式 layout-->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50} %L -)  %highlight(%msg%n)
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %5p [%t] %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''} - %m%n
+            </pattern>-->
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss.SSS, Asia/Shanghai}) %boldMagenta([%t]) %highlight(%-5level) %cyan(%logger{50} [%file : %line] -) %msg%n
             </pattern>
         </layout>
     </appender>
@@ -15,7 +17,7 @@
         <logger name="org.springframework" level="INFO" additivity="false">
             <appender-ref ref="consoleLog"/>
         </logger>
-        <logger name="com.suntek.viid" level="DEBUG" additivity="false">
+        <logger name="com.fdfs.client.updownfile" level="DEBUG" additivity="false">
             <appender-ref ref="consoleLog"/>
         </logger>
         <logger name="org.mybatis" level="DEBUG" additivity="false">
@@ -44,13 +46,13 @@
             如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天
             的日志改名为今天的日期。即，<File> 的日志都是当天的。
             -->
-            <File>${logback.logPath}/viid_info.log</File>
+            <File>${logback.logPath}/fdfsClient_info.log</File>
             <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间.
                 滚动时产生的文件的存放位置及文件名称 %d{yyyy-MM-dd}：按天进行日志滚动%i：
                 当文件大小超过maxFileSize时，按照i进行文件滚动-->
-                <FileNamePattern>${logback.logPath}/viid_info.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <FileNamePattern>${logback.logPath}/fdfsClient_info.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <!--只保留最近3天的日志-->
                 <maxHistory>3</maxHistory>
                 <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
@@ -75,11 +77,11 @@
             如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天
             的日志改名为今天的日期。即，<File> 的日志都是当天的。
             -->
-            <File>${logback.logPath}/viid_error.log</File>
+            <File>${logback.logPath}/fdfsClient_error.log</File>
             <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-                <FileNamePattern>${logback.logPath}/viid_error.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <FileNamePattern>${logback.logPath}/fdfsClient_error.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <!--只保留最近3天的日志-->
                 <maxHistory>3</maxHistory>
                 <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
@@ -99,7 +101,7 @@
             <appender-ref ref="fileInfoLog"/>
             <appender-ref ref="fileErrorLog"/>
         </logger>
-        <logger name="com.suntek.viid" level="INFO" additivity="false">
+        <logger name="com.fdfs.client.updownfile" level="INFO" additivity="false">
             <appender-ref ref="consoleLog"/>
             <appender-ref ref="fileInfoLog"/>
             <appender-ref ref="fileErrorLog"/>
