@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,15 +50,15 @@ public class FdfsFileService {
     }
 
 
-/*
+
     public static void main(String[] args) {
         FdfsFileService fdfsFileService = new FdfsFileService();
-        List<String> files = fdfsFileService.getfdfsURL();
-        for (String file : files) {
+        File [] files= iteratorFile((new File("E:\\fdfs\\FILE_SERVER\\fastdfs_storage_data\\data")));
+        for (File file : files) {
             System.out.println(file);
         }
     }
-*/
+
 
     //返回当前组别，这里写死，但实际上应该使用嗅探机制去获取组别，这里留一个接口以供扩展
     private String getGroup(){
@@ -65,8 +66,36 @@ public class FdfsFileService {
     }
 
     //返回当前Fdfs文件夹路径，这里写死，但实际上应该使用递归去获取文件夹，这里留一个接口以供扩展
-    private String getPrefixDir(){
+    private String getPrefixDir() {
         return "M00/00/00/";
+    }
+
+    private static File[] iteratorFile(File file){
+        File[] files= {file};
+        return itraterDir(files);
+    }
+
+    /**
+     * @param files
+     * @return
+     */
+    private static File[] itraterDir(File... files){
+        String[] fdfsDir;
+        File[] fdfsFile = null;
+        for(File file : files) {
+            if (file.exists()) {
+                if (file.isDirectory()) {
+                    fdfsFile = file.listFiles();
+                }else {
+                    break;
+                }
+            }else {
+                break;
+            }
+        assert fdfsFile != null;
+        itraterDir(fdfsFile);
+        }
+       return fdfsFile;
     }
 
     //文件封装，返回可访问图片文件
